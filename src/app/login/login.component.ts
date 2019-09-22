@@ -15,9 +15,12 @@ export class LoginComponent implements OnInit,OnDestroy{
   private lastname: String;
   private email: String;
   private password: String;
+  private createAccount : boolean;
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.createAccount = false;
+   }
 
   ngOnInit() {
 
