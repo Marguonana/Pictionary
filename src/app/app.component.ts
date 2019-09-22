@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Pictionary';
+  title : String = 'Pictionary';
+  showHeader: boolean;
+
+  constructor(){
+    this.showHeader = true;
+  }
+
 }
