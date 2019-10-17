@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { ThemesComponent } from './themes/themes.component';
+import { DrawzoneComponent } from './drawzone/drawzone.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ThemesComponent } from './themes/themes.component';
     LoginComponent,
     HeaderComponent,
     ThemesComponent,
+    DrawzoneComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,10 @@ import { ThemesComponent } from './themes/themes.component';
       {
         path:'themes',
         component: ThemesComponent
+      },
+      {
+        path: 'play',
+        component: DrawzoneComponent
       }
     ])
   ],
