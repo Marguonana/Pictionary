@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { DrawzoneComponent } from './drawzone/drawzone.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    DrawzoneComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +28,12 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     RouterModule.forRoot([
       {
-        path: '**',
+        path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'play',
+        component: DrawzoneComponent
       }
     ])
   ],
