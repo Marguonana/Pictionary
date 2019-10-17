@@ -6,9 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./soumission-reponse.component.css']
 })
 export class SoumissionReponseComponent implements OnInit {
-  constructor() { }
+
+  private motPropose:String;
+
+  constructor(motPropose:String) {
+    this.motPropose = motPropose;
+   }
 
   ngOnInit() {
+  }
+
+  public estMotTrouve(motATrouver:String):Boolean{
+    return this.motPropose.toLowerCase() == motATrouver.toLowerCase();
   }
 
 }
