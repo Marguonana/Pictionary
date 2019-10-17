@@ -11,13 +11,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { SoumissionReponseComponent } from './soumission-reponse/soumission-reponse.component';
+import { DrawzoneComponent } from './drawzone/drawzone.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    SoumissionReponseComponent
+    SoumissionReponseComponent,
+    DrawzoneComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,10 @@ import { SoumissionReponseComponent } from './soumission-reponse/soumission-repo
       {
         path: 'ecranReponses',
         component:SoumissionReponseComponent
+      },
+      {
+        path: 'play',
+        component: DrawzoneComponent
       }
     ])
   ],
