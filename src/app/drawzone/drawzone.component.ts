@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-drawzone',
@@ -6,35 +6,39 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./drawzone.component.css']
 })
 export class DrawzoneComponent implements OnInit {
-  private isDrawing : boolean = false;
-  private callibrage : Object;
-
   @ViewChild('canvas', { static: true })
-  canvas: ElementRef<HTMLCanvasElement>;  
-  
+  canvas: ElementRef<HTMLCanvasElement>;
+
+  private isDrawing : boolean = false;  
   private ctx: CanvasRenderingContext2D;
+  callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
+  private pen: any;
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.ctx.fillStyle = 'black';
     this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
-                        'white': [] }]
+                        'white': [] }];
   }
   
   animate(): void {}
 
-  setMouseDown(pen) : void {
-    this.isDrawing = !this.isDrawing;
-    if(!this.isDrawing) return;
+  setIsDrawing(event) : void {
+    this.isDrawing = true;
     console.log("mousedown");
-    this.ctx.fillRect(pen.layerX-10,pen.layerY+5,1,1);
   }
 
-  draw(pen) : void {
+  setIsNotDrawing(event) : void {
+    this.isDrawing = false;
+    console.log('mouseup');
+  }
+
+  drawing(event) : void{
     if(this.isDrawing){
-      console.log("On dessine !")
-      
-      console.log(pen);
+      console.log("penX : "+event.layerX + ". penY : " + event.layerY);
+     this.ctx.fillRect(event.layerX-10,event.layerY+5,2,2);
     }
   }
+
+
 }
