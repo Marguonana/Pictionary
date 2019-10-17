@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { SoumissionReponseComponent } from './soumission-reponse/soumission-reponse.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    SoumissionReponseComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +28,12 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     RouterModule.forRoot([
       {
-        path: '**',
+        path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'ecranReponses',
+        component:SoumissionReponseComponent
       }
     ])
   ],
