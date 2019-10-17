@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 
 import {FormsModule} from '@angular/forms';
 import { CustomMaterialModule } from './core/material.module';
@@ -24,6 +27,7 @@ import { ThemesComponent } from './themes/themes.component';
     BrowserAnimationsModule,
     CustomMaterialModule,
     MatInputModule,
+    MatGridListModule,
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
