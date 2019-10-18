@@ -5,17 +5,19 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./soumission-reponse.component.html",
   styleUrls: ["./soumission-reponse.component.css"]
 })
-export class SoumissionReponseComponent implements OnInit {
-  private motPropose: String;
 
-  constructor(motPropose: String) {
-    this.motPropose = motPropose;
+export class SoumissionReponseComponent implements OnInit {
+  private motATrouver:String;
+  private motPropose:String;
+
+  constructor() {
+    this.motATrouver = "reponse";
   }
 
   ngOnInit() {}
 
-  public estMotTrouve(motATrouver: String): Boolean {
-    console.log("ok");
-    return this.motPropose.toLowerCase() == motATrouver.toLowerCase();
+  public estMotTrouve(): Boolean {
+    console.log(this.motPropose);
+    return this.motATrouver.toLowerCase() == this.motPropose.toLowerCase();
   }
 }

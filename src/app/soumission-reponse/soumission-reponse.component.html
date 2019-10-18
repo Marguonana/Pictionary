@@ -1,6 +1,6 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Réponse" value="" disabled="false" />
+    <input matInput placeholder="Réponse" [(ngModel)]="motPropose" [ngModelOptions]="{standalone: true}" [readonly]="estMotTrouve()"/>
   </mat-form-field>
-  <button onsubmit="estMotTrouve(value)" mat-stroked-button>Valider</button>
-</form>
+  <button mat-stroked-button>Valider</button>
+</form> 
