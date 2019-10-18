@@ -13,15 +13,17 @@ export interface Tile {
   styleUrls: ['./themes.component.css']
 })
 export class ThemesComponent implements OnInit {
-  tiles: Tile[] = [
-    {text: 'One', cols: 1, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 1, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 1, rows: 1, color: '#DDBDF1'},
-    {text: 'Five', cols: 1, rows: 1, color: '#DDCHF8'},
-  ];
+  tiles: Tile[] ;
 
-  constructor() { }
+  constructor() { 
+    this.tiles = [
+      {text: 'One', cols: 1, rows: 1, color: 'lightblue'},
+      {text: 'Two', cols: 1, rows: 1, color: 'lightgreen'},
+      {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
+      {text: 'Four', cols: 1, rows: 1, color: '#DDBDF1'},
+      {text: 'Five', cols: 1, rows: 1, color: '#DDCHF8'},
+    ];
+  }
 
   ngOnInit() {
   }
