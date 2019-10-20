@@ -17,8 +17,8 @@
 </mat-grid-list> -->
 
 <mat-grid-list cols="5" rowHeight="200px" gutterSize="10px">
-  <mat-grid-tile
-      *ngFor="let tile of tiles; let i = index"
+  <mat-grid-tile 
+      *ngFor="let tile of tiles; let i = index" (click)="onClickMe(tile)"
       [colspan]="tile.cols"
       [rowspan]="tile.rows"
       [style.background]="tile.color"
