@@ -24,12 +24,23 @@
       [ngModelOptions]="{ standalone: true }"
     />
   </mat-form-field>
+
   <button
+    mat-icon-button
+    color="primary"
+    aria-label="Envoyer message"
+    (keyup.enter)="posterMessage()"
+    (click)="posterMessage()"
+  >
+    <mat-icon>send</mat-icon>
+  </button>
+
+  <!--button
     mat-button
     color="primary"
     (keyup.enter)="posterMessage()"
     (click)="posterMessage()"
   >
     Envoyer message
-  </button>
+  </button-->
 </form>
