@@ -1,20 +1,4 @@
-/*@import "@material/image-list/mdc-image-list";
-
-.my-image-list {
-    @include mdc-image-list-standard-columns(5);
-  }*/
-
-  
-
-  .example-card {
-    max-width: 400px;
-  }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-
-  mat-grid-tile {
-    background: lightblue;
-  }
+ .tile5 {
+    background: lightblue; 
+    background-image: url('../../ressources/images/2.jpg');
+  } 

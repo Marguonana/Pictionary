@@ -4,27 +4,31 @@
         </mat-grid-tile>
         <mat-grid-tile>2</mat-grid-tile>
         
-</mat-grid-list>
+</mat-grid-list> -->
 
-
-<mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>1</mat-grid-tile>
-        <mat-grid-tile>2</mat-grid-tile>
-        <mat-grid-tile>3</mat-grid-tile>
-        <mat-grid-tile>4</mat-grid-tile>
-      </mat-grid-list> -->
       
+<!-- <mat-grid-list cols="5" rowHeight="200px" gutterSize="10px">
+  <mat-grid-tile><img src="../../ressources/images/1.jpg"><mat-grid-tile-footer>texte</mat-grid-tile-footer></mat-grid-tile>
+  <mat-grid-tile>2<mat-grid-tile-footer>texte</mat-grid-tile-footer></mat-grid-tile>
+  <mat-grid-tile>3<mat-grid-tile-footer>texte</mat-grid-tile-footer></mat-grid-tile>
+  <mat-grid-tile>4<mat-grid-tile-footer>texte</mat-grid-tile-footer></mat-grid-tile>
+  <mat-grid-tile>5<mat-grid-tile-footer>texte</mat-grid-tile-footer></mat-grid-tile>
+  
+</mat-grid-list> -->
+
 <mat-grid-list cols="5" rowHeight="200px" gutterSize="10px">
   <mat-grid-tile
-      *ngFor="let tile of tiles"
+      *ngFor="let tile of tiles; let i = index"
       [colspan]="tile.cols"
       [rowspan]="tile.rows"
-      [style.background]="tile.color">
-      {{tile.text}}
-    <mat-grid-tile-footer>texte</mat-grid-tile-footer>
+      [style.background]="tile.color"
+      [ngStyle]="{ 'border-radius': tile.borderRadius , 'font-size': tile.fontSize,
+      'font-family': tile.fontFamily +', sans-serif;'}"
+      [ngClass]="'tile' + i"
+      >
+      <img [src]="tile.imageUrl"/>
+     
+    <mat-grid-tile-footer>{{tile.text}}</mat-grid-tile-footer>
     
   </mat-grid-tile>
 </mat-grid-list>
-
-
-
