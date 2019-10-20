@@ -2,5 +2,5 @@
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Réponse" [(ngModel)]="motPropose" [ngModelOptions]="{standalone: true}" [readonly]="estMotTrouve()"/>
   </mat-form-field>
-  <button mat-stroked-button>Valider</button>
+  <button mat-stroked-button (keyup.enter=envoyerMessage())>Valider</button>
 </form> 

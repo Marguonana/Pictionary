@@ -1,0 +1,35 @@
+<form class="example-form">
+  <!--mat-form-field id="chat" class="example-full-width">
+    <textarea
+      matInput
+      placeholder="Chat"
+      readonly="true"
+      [(ngModel)]="messages"
+      [ngModelOptions]="{ standalone: true }"
+    ></textarea>
+  </mat-form-field-->
+
+  <textarea
+    id="chat"
+    readonly="true"
+    [(ngModel)]="messages"
+    [ngModelOptions]="{ standalone: true }"
+  >
+  </textarea>
+  <mat-form-field id="message" class="example-full-width">
+    <input
+      matInput
+      placeholder="Message"
+      [(ngModel)]="message"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </mat-form-field>
+  <button
+    mat-button
+    color="primary"
+    (keyup.enter)="posterMessage()"
+    (click)="posterMessage()"
+  >
+    Envoyer message
+  </button>
+</form>

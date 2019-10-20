@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { SoumissionReponseComponent } from './soumission-reponse/soumission-reponse.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DrawzoneComponent } from './drawzone/drawzone.component';
     LoginComponent,
     HeaderComponent,
     SoumissionReponseComponent,
-    DrawzoneComponent
+    DrawzoneComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,10 @@ import { DrawzoneComponent } from './drawzone/drawzone.component';
       {
         path: 'play',
         component: DrawzoneComponent
+      },
+      {
+        path: 'chat',
+        component: ChatComponent
       }
     ])
   ],
