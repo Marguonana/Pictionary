@@ -10,14 +10,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { SoumissionReponseComponent } from './soumission-reponse/soumission-reponse.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    DrawzoneComponent
+    SoumissionReponseComponent,
+    DrawzoneComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +36,16 @@ import { DrawzoneComponent } from './drawzone/drawzone.component';
         component: LoginComponent
       },
       {
+        path: 'ecranReponses',
+        component:SoumissionReponseComponent
+      },
+      {
         path: 'play',
         component: DrawzoneComponent
+      },
+      {
+        path: 'chat',
+        component: ChatComponent
       }
     ])
   ],

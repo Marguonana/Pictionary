@@ -1,0 +1,16 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 50%;
+}
+
+#chat {
+  height: 30em;
+  width:30em;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
