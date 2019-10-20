@@ -1,4 +1,9 @@
- .tile5 {
+ /* .tile5 {
     background: lightblue; 
     background-image: url('../../ressources/images/2.jpg');
-  } 
+  }  */
+
+  .mat-grid-tile-footer{
+    font-size: 18px;
+    
+  }
