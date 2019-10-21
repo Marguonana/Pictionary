@@ -17,7 +17,13 @@ export class SoumissionReponseComponent implements OnInit {
   ngOnInit() {}
 
   public estMotTrouve(): Boolean {
-    console.log(this.motPropose);
-    return this.motATrouver.toLowerCase() == this.motPropose.toLowerCase();
+    if (this.motPropose){
+      return this.motATrouver.toLowerCase() == this.motPropose.toLowerCase();
+    }
+    return false;
+  }
+
+  public envoyerMessage() : Boolean {
+    return true;
   }
 }
