@@ -8,19 +8,23 @@ import { Component, OnInit } from "@angular/core";
 export class ChatComponent implements OnInit {
   pseudo: String;
   message: String;
-  messages: String;
+  messages: Array<String>;
 
   constructor() {
     this.pseudo = sessionStorage.getItem('pseudo') ? sessionStorage.getItem('pseudo') : 'randomUser';
     this.message = "";
-    this.messages="";
+    this.messages=new Array<String>();
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   posterMessage() {
-    if(this.message != ""){
-      this.messages+= this.pseudo + " : " + this.message + "\n";
+
+    if(this.message){
+      this.messages.push(this.message);
       this.message="";
     }
   }

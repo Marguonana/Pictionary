@@ -44,7 +44,7 @@ import { ChatComponent } from './chat/chat.component';
         component: DrawzoneComponent
       },
       {
-        path: 'chat',
+        path: 'themes',
         component: ChatComponent
       }
     ])
