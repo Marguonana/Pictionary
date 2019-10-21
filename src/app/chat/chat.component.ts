@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit {
   }
 
   posterMessage() {
+
     if(this.message){
       this.messages.push(this.message);
       this.message="";
