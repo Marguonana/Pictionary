@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit,OnDestroy{
-  private username: String;
-  private email: String;
-  private password2 : String;
-  private password: String;
+  private username: string;
+  private email: string;
+  private pseudo : string;
+  private password2 : string;
+  private password: string;
   private createAccount : boolean;
   
 
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit,OnDestroy{
    }
 
   ngOnInit() {
-
+    if(sessionStorage.getItem('pseudo') && sessionStorage.getItem('pseudo').length > 0){
+      this.redirectToTheme();
+    }
   }
 
   login() : void {
@@ -31,6 +34,17 @@ export class LoginComponent implements OnInit,OnDestroy{
     }else {
       alert("Invalid credentials");
     }
+  }
+
+  quickLogin() : void {
+    if (this.pseudo){
+      sessionStorage.setItem("pseudo",this.pseudo);
+      this.redirectToTheme();
+    }
+  }
+
+  redirectToTheme() : void {
+    this.router.navigate(['/themes']);
   }
 
   /***
@@ -49,6 +63,6 @@ export class LoginComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    
   }
 }

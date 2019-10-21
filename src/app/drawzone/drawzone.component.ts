@@ -16,6 +16,8 @@ export class DrawzoneComponent implements OnInit {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.ctx.imageSmoothingQuality = 'high';
+    this.ctx.lineJoin = 'round';
     this.ctx.fillStyle = 'black';
     this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
                         'white': [] }];
@@ -36,7 +38,7 @@ export class DrawzoneComponent implements OnInit {
   drawing(event) : void{
     if(this.isDrawing){
       console.log("penX : "+event.layerX + ". penY : " + event.layerY);
-     this.ctx.fillRect(event.layerX-10,event.layerY+5,2,2);
+     this.ctx.fillRect(event.layerX-10,event.layerY+5,5,5);
     }
   }
 

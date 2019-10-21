@@ -11,7 +11,7 @@ export class ChatComponent implements OnInit {
   messages: Array<String>;
 
   constructor() {
-    this.pseudo = "pse";
+    this.pseudo = sessionStorage.getItem('pseudo') ? sessionStorage.getItem('pseudo') : 'randomUser';
     this.message = "";
     this.messages=new Array<String>();
 
