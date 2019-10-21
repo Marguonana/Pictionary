@@ -1,21 +1,15 @@
 <form class="example-form">
-  <!--mat-form-field id="chat" class="example-full-width">
-    <textarea
-      matInput
-      placeholder="Chat"
-      readonly="true"
-      [(ngModel)]="messages"
-      [ngModelOptions]="{ standalone: true }"
-    ></textarea>
-  </mat-form-field-->
-
-  <textarea
+    <div id="chatZone">
+      <div style="text-align: center;">ChatZone</div>
+      <div *ngFor="let m of messages"><strong>{{pseudo}}</strong> : {{m}}</div>
+    </div>
+  <!-- <textarea
     id="chat"
     readonly="true"
     [(ngModel)]="messages"
     [ngModelOptions]="{ standalone: true }"
   >
-  </textarea>
+  </textarea> -->
   <mat-form-field id="message" class="example-full-width">
     <input
       matInput
