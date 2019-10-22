@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; 
 
 export interface Tile {
  
@@ -18,7 +19,7 @@ export interface Tile {
 export class ThemesComponent implements OnInit {
    tiles: Tile[] ;
 
-  constructor() { 
+  constructor(private router: Router) { 
      this.tiles = [
        {text: 'Transports', cols: 1, rows: 1 ,imageUrl:'assets/images/5.jpg', borderRadius:'20px'},
        {text: 'Fruits', cols: 1, rows: 1 ,imageUrl:'assets/images/2.jpg',borderRadius:'20px'},
@@ -32,4 +33,9 @@ export class ThemesComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick(tile) : void {
+    this.router.navigate(['/play',{'theme': tile.text}]);
+    // console.log ("welcome"+ tile.text);
+
+  }
 }
