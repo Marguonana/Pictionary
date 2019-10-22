@@ -1,8 +1,10 @@
 <div id="fakeBorder">
         <canvas id="canvasZone" #canvas width="600" height="300" 
         (mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
-        (mousemove)="drawing($event)" ></canvas>
+        (mousemove)="drawing($event)" [ngStyle]="{'cursor': pen.cursor}" ></canvas>
 </div>
+{{pen.cursor}}
 <div style="background-color:aqua">
-    <img id="eraser" alt="eraser" src="assets/Eraser.png" (click)="pointer = 'eraser'" />
+    <img id="eraser" alt="eraser" src="../../assets/images/cursor/Eraser.png" (click)="selectItem('eraser')" />
+    <img id="blackPen" alt="blackPen" src="../../assets/images/cursor/Pencil_black.png" (click)="selectItem('blackPen')" />
 </div>
