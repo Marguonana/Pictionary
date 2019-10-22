@@ -41,7 +41,6 @@ import { ChatComponent } from './chat/chat.component';
       {
         path: 'login',
         component: LoginComponent
-
       },
       {
         path:'themes',
@@ -56,7 +55,11 @@ import { ChatComponent } from './chat/chat.component';
         component: DrawzoneComponent
       },
       {
-        path: 'themes',
+        path: 'play/:theme',
+        component: DrawzoneComponent
+      },
+      {
+        path: 'chat',
         component: ChatComponent
       }
     ])
