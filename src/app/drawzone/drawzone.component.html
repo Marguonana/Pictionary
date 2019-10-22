@@ -1,3 +1,8 @@
-<canvas id="canvasZone" #canvas width="600" height="300" 
-(mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
-(mousemove)="drawing($event)"></canvas>
+<div id="fakeBorder">
+        <canvas id="canvasZone" #canvas width="600" height="300" 
+        (mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
+        (mousemove)="drawing($event)" ></canvas>
+</div>
+<div style="background-color:aqua">
+    <img id="eraser" alt="eraser" src="assets/Eraser.png" (click)="pointer = 'eraser'" />
+</div>

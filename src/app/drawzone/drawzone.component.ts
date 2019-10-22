@@ -13,6 +13,7 @@ export class DrawzoneComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
   private pen: any;
+  private pointer : string;
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -37,9 +38,27 @@ export class DrawzoneComponent implements OnInit {
 
   drawing(event) : void{
     if(this.isDrawing){
-      console.log("penX : "+event.layerX + ". penY : " + event.layerY);
-     this.ctx.fillRect(event.layerX-10,event.layerY+5,5,5);
+      this.ctx.beginPath();
+      this.ctx.lineWidth = 3;
+      this.ctx.lineCap = 'round';
+      this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
+      this.ctx.lineTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
+      this.ctx.stroke();
+
+      console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
     }
+  }
+
+  selectItem(item) : string {
+    let style = 'url(../../ressources/images/Pencil_black.png) 0 15,auto'
+    switch(item){
+      case 'eraser':
+        style = 'url(../../ressources/images/Eraser.jpeg) 0 15,auto';
+        break;
+      default: 
+        break;
+    }
+    return style;
   }
 
 

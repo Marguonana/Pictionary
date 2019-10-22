@@ -1,6 +1,10 @@
 #canvasZone{
-    border: 10px ridge #bac1c5;
-    margin: 5px;
     border-radius: 2px;
-    cursor: url(../../ressources/images/Pencil_black.png), auto;
+    cursor: url(../../ressources/images/Pencil_black.png) 0 15,auto;
+}
+
+#fakeBorder{
+    border: 10px ridge #bac1c5;
+    height:310px;
+    width: 610px;
 }
