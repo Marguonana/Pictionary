@@ -5,5 +5,12 @@
 
   .mat-grid-tile-footer{
     font-size: 18px;
-    
+  }
+/* .mat-grid-list{
+  margin-top: 30px;
+  margin-left: 10px;
+} */
+  img {
+    max-width: 100%;
+    height: auto;
   }
