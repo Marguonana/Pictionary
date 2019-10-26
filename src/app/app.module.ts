@@ -2,9 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { CustomMaterialModule } from './core/material.module';
 import {MatInputModule} from '@angular/material';
@@ -32,6 +30,7 @@ import { ChatComponent } from './chat/chat.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CustomMaterialModule,
     MatInputModule,
     MatGridListModule,
