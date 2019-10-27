@@ -25,7 +25,7 @@ export class ThemesComponent implements OnInit {
        {text: 'Jeux', cols: 1, rows: 1 ,imageUrl:'assets/images/3.jpg',borderRadius:'20px'},
        {text: 'Animaux', cols: 1, rows: 1,imageUrl:'assets/images/4.jpg',borderRadius:'20px'},
        {text: 'Plantes', cols: 1, rows: 1,imageUrl:'assets/images/6.jpg',borderRadius:'20px'},
-       {text: 'Ville', cols: 1, rows: 1,imageUrl:'assets/images/1.jpg',borderRadius:'20px'},
+       {text: 'Villes', cols: 1, rows: 1,imageUrl:'assets/images/1.jpg',borderRadius:'20px'},
      ];
   }
 

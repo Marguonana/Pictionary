@@ -17,6 +17,7 @@ import { SoumissionReponseComponent } from './soumission-reponse/soumission-repo
 import { ThemesComponent } from './themes/themes.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
 import { ChatComponent } from './chat/chat.component';
+import { PointComponent } from './point/point.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ChatComponent } from './chat/chat.component';
     DrawzoneComponent,
     ChatComponent,
     ThemesComponent,
-    DrawzoneComponent
+    DrawzoneComponent,
+    PointComponent
   ],
   imports: [
     BrowserModule,
