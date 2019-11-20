@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import {FormsModule} from '@angular/forms';
@@ -17,6 +17,7 @@ import { SoumissionReponseComponent } from './soumission-reponse/soumission-repo
 import { ThemesComponent } from './themes/themes.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
 import { ChatComponent } from './chat/chat.component';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ChatComponent } from './chat/chat.component';
     CustomMaterialModule,
     MatInputModule,
     MatGridListModule,
+    MatDialogModule,
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
