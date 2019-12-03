@@ -1,6 +1,21 @@
+#playZone{
+    display:flex;
+}
+
 #canvasZone{
-    border: 10px ridge #bac1c5;
-    margin: 5px;
     border-radius: 2px;
-    cursor: url(../../ressources/images/Pencil_black.png), auto;
+}
+
+#fakeBorder{
+    border: 10px ridge #bac1c5;
+    height:310px;
+    width: 610px;
+}
+
+#tools{
+    border-radius: 5px;
+    background-color: #e7eff9;
+    background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);   
+    width: 60px;
+    height: 150px;
 }

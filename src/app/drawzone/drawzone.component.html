@@ -1,3 +1,11 @@
-<canvas id="canvasZone" #canvas width="600" height="300" 
-(mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
-(mousemove)="drawing($event)"></canvas>
+<div id="playZone">
+    <div id="fakeBorder">
+            <canvas id="canvasZone" #canvas width="600" height="300" 
+            (mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
+            (mousemove)="drawing($event)" [ngStyle]="{'cursor': pen.cursor}" ></canvas>
+    </div>
+    <mat-card id="tools">
+            <img id="eraser" alt="eraser" src="../../assets/images/cursor/Eraser.png" (click)="selectItem('eraser')" />
+            <img id="blackPen" alt="blackPen" src="../../assets/images/cursor/Pencil_black.png" (click)="selectItem('blackPen')" />
+    </mat-card>
+</div>

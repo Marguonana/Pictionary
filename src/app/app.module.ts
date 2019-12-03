@@ -5,6 +5,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
+import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { CustomMaterialModule } from './core/material.module';
 import {MatInputModule} from '@angular/material';
@@ -17,6 +18,7 @@ import { SoumissionReponseComponent } from './soumission-reponse/soumission-repo
 import { ThemesComponent } from './themes/themes.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
 import { ChatComponent } from './chat/chat.component';
+import { PointComponent } from './point/point.component';
 
 
 @NgModule({
@@ -28,11 +30,13 @@ import { ChatComponent } from './chat/chat.component';
     DrawzoneComponent,
     ChatComponent,
     ThemesComponent,
-    DrawzoneComponent
+    DrawzoneComponent,
+    PointComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CustomMaterialModule,
     MatInputModule,
     MatGridListModule,
