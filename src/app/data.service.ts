@@ -18,11 +18,10 @@ export class DataService implements OnDestroy {
    * 
    * @param route Instance de la classe RouteList
    * Methode permettant de faire un post
+   * Les données seront mise dans req.body.[PARAM]
    */
   public sendPostRequest(route : string){
-    this.setHttpParams();
-    let params = this.httpParams;
-    return this.httpClient.post(this.REST_API_SERVER + route, {params});
+    return this.httpClient.post(this.REST_API_SERVER + route, this.setObjectParams());
   }
 
   /**
@@ -61,12 +60,24 @@ export class DataService implements OnDestroy {
   /**
    * Initialise les parametres en entête de la requete front
    */
-  private setHttpParams(){
-    if (this.params && this.values && this.params.length != 0 && this.params.length === this.values.length){
+  private setHttpParams() : HttpParams{
+    if (this.paramsReady()){
+      this.httpParams = new HttpParams();
       this.params.forEach((param, index)=>{
-        this.httpParams = new HttpParams().set(param,this.values[index]);
+        this.httpParams = this.httpParams.set(param,this.values[index]);
       })
     }
+    return this.httpParams;
+  }
+
+  private setObjectParams() : Object {
+    let body : Object = {};
+    if (this.paramsReady()){
+      this.params.forEach((param, index) => {
+        body[param] = this.values[index];
+      })
+    }
+    return body;
   }
 
   /**
@@ -102,11 +113,15 @@ export class DataService implements OnDestroy {
     });
   }
 
+  public paramsReady(){
+    return (this.params && this.values && this.params.length != 0 && this.params.length === this.values.length)
+  }
+
   /**
    * Fonction appelé lors de la destruction du service
    */
   ngOnDestroy(): void {
-    console.log(" Dataservice destroyed")
+    console.log(" Dataservice destroyed");
   }
 }
 
@@ -115,18 +130,16 @@ export class DataService implements OnDestroy {
  */
 export class RouteList {
   private REST_API_WORDS = "/theme/words";
-  private REST_API_THEME = "/theme/theme";
-  private REST_API_ACTIVITE = "/theme/words";
+  private REST_API_CANVAS = "/partie/canvas"
 
   dispatcher(keyWord){
     let route = undefined;
     switch(keyWord){
-      case "activite":
-        route = this.REST_API_ACTIVITE;
-        break;
       case "choixTheme":
         route = this.REST_API_WORDS;
         break;
+      case "sendCanvas":
+        route = this.REST_API_CANVAS;
     }
     return route;
   }
