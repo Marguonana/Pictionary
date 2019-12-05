@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
 
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+
 @Component({
   selector: 'app-drawzone',
   templateUrl: './drawzone.component.html',
@@ -14,6 +17,8 @@ export class DrawzoneComponent implements OnInit {
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
   pen;
   private pointer : string;
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.pen = {};
@@ -68,5 +73,21 @@ export class DrawzoneComponent implements OnInit {
     }
   }
 
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        id: 1,
+        title: 'Words'
+    };
+
+    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      alert("response: " + result)
+    });
+  }
 
 }
