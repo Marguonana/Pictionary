@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import { DataService, RouteList } from '../data.service';
 
 @Component({
   selector: 'app-drawzone',
@@ -8,12 +9,15 @@ import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core
 export class DrawzoneComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
-
   private isDrawing : boolean = false;  
   private ctx: CanvasRenderingContext2D;
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
   pen;
   private pointer : string;
+
+constructor(private dataService: DataService){
+
+}
 
   ngOnInit(): void {
     this.pen = {};
@@ -43,11 +47,12 @@ export class DrawzoneComponent implements OnInit {
     if(this.isDrawing){
       this.ctx.beginPath();
       this.ctx.lineCap = 'round';
-      this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
+      this.ctx.lineJoin = 'round';
+    //  this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.lineTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.stroke();
-
       console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
+      this.extractCanvas();
     }
   }
 
@@ -66,6 +71,13 @@ export class DrawzoneComponent implements OnInit {
       default: 
         break;
     }
+  }
+
+  extractCanvas() : void {
+    let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
+    this.dataService.setterParamsKey('theme','canvas');
+    this.dataService.setterParamsValues("Transports",canvasPng);
+    this.dataService.sendPostRequest(new RouteList().dispatcher("sendCanvas")).subscribe((data: ArrayBuffer)=>{console.log(data)})
   }
 
 
