@@ -66,3 +66,7 @@ export class LoginComponent implements OnInit,OnDestroy{
     
   }
 }
+
+class Joueur {
+  
+}

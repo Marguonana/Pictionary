@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
-import { DataService } from '../data.service';
+import { DataService, RouteList } from '../data.service';
 
 export interface Tile {
  
@@ -35,10 +35,10 @@ export class ThemesComponent implements OnInit {
   }
 
   onClick(tile) : void {
-    this.dataService.setParams(tile.text.toLowerCase(),'choixTheme');
-    this.dataService.sendGetRequest().subscribe((data: ArrayBuffer)=>{
-      console.log(data);
-    })
+    this.dataService.setterParamsKey('theme');
+    this.dataService.setterParamsValues(tile.text.toUpperCase());
+    this.dataService.sendGetRequest(new RouteList().dispatcher("choixTheme")).subscribe((data: ArrayBuffer)=>{console.log(data)})
+
     // tuto : https://www.techiediaries.com/angular-by-example-httpclient-get/
     this.router.navigate(['/play',{'theme': tile.text}]);
     // console.log ("welcome"+ tile.text);
