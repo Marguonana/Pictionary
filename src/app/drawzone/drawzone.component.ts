@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import { DataService, RouteList } from '../data.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
@@ -11,7 +12,6 @@ import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 export class DrawzoneComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
-
   private isDrawing : boolean = false;  
   private ctx: CanvasRenderingContext2D;
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
@@ -19,6 +19,7 @@ export class DrawzoneComponent implements OnInit {
   private pointer : string;
 
   constructor(public dialog: MatDialog) {}
+
 
   ngOnInit(): void {
     this.pen = {};
@@ -48,11 +49,12 @@ export class DrawzoneComponent implements OnInit {
     if(this.isDrawing){
       this.ctx.beginPath();
       this.ctx.lineCap = 'round';
-      this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
+      this.ctx.lineJoin = 'round';
+    //  this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.lineTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.stroke();
-
       console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
+      this.extractCanvas();
     }
   }
 
@@ -73,6 +75,7 @@ export class DrawzoneComponent implements OnInit {
     }
   }
 
+
   openModal() {
     const dialogConfig = new MatDialogConfig();
 
@@ -89,5 +92,13 @@ export class DrawzoneComponent implements OnInit {
       alert("response: " + result)
     });
   }
+
+  extractCanvas() : void {
+    let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
+    this.dataService.setterParamsKey('theme','canvas');
+    this.dataService.setterParamsValues("Transports",canvasPng);
+    this.dataService.sendPostRequest(new RouteList().dispatcher("sendCanvas")).subscribe((data: ArrayBuffer)=>{console.log(data)})
+  }
+
 
 }
