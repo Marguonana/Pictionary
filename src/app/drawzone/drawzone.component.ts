@@ -18,7 +18,7 @@ export class DrawzoneComponent implements OnInit {
   pen;
   private pointer : string;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private dataService: DataService) {}
 
 
   ngOnInit(): void {
