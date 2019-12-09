@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule } from '@angular/material';
+
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { CustomMaterialModule } from './core/material.module';
@@ -16,6 +19,8 @@ import { ThemesComponent } from './themes/themes.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
 import { ChatComponent } from './chat/chat.component';
 import { PointComponent } from './point/point.component';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { PointComponent } from './point/point.component';
     ChatComponent,
     ThemesComponent,
     DrawzoneComponent,
-    PointComponent
+    PointComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,9 @@ import { PointComponent } from './point/point.component';
     CustomMaterialModule,
     MatInputModule,
     MatGridListModule,
+    MatDialogModule,
+    MatButtonModule,
+    
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
@@ -62,11 +71,17 @@ import { PointComponent } from './point/point.component';
       {
         path: 'chat',
         component: ChatComponent
+      },
+      {
+        path: 'mydialog',
+        component: MyDialogComponent
       }
     ])
   ],
   providers: [],
   bootstrap: [AppComponent],
-  
+  entryComponents: [
+    MyDialogComponent
+    ]
 })
 export class AppModule { }

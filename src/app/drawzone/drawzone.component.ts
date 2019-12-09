@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { DataService, RouteList } from '../data.service';
 
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+
 @Component({
   selector: 'app-drawzone',
   templateUrl: './drawzone.component.html',
@@ -15,9 +18,8 @@ export class DrawzoneComponent implements OnInit {
   pen;
   private pointer : string;
 
-constructor(private dataService: DataService){
+  constructor(public dialog: MatDialog, private dataService: DataService) {}
 
-}
 
   ngOnInit(): void {
     this.pen = {};
@@ -71,6 +73,24 @@ constructor(private dataService: DataService){
       default: 
         break;
     }
+  }
+
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        id: 1,
+        title: 'Words'
+    };
+
+    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      alert("response: " + result)
+    });
   }
 
   extractCanvas() : void {
