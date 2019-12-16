@@ -31,6 +31,7 @@ export class DrawzoneComponent implements OnInit {
     this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
                         'white': [] }];
     this.pen.cursor = 'url(../../assets/images/cursor/Pencil_black.png) 0 15,auto';
+    this.openModal();
   }
   
   animate(): void {}
@@ -55,6 +56,7 @@ export class DrawzoneComponent implements OnInit {
       this.ctx.stroke();
       console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
       this.extractCanvas();
+     
     }
   }
 
