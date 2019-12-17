@@ -9,6 +9,7 @@ export class ChatComponent implements OnInit {
   pseudo: String;
   message: String;
   messages: Array<String>;
+  motATrouver = "reponse";
 
   constructor() {
     this.pseudo = sessionStorage.getItem('pseudo') ? sessionStorage.getItem('pseudo') : 'randomUser';
@@ -21,10 +22,23 @@ export class ChatComponent implements OnInit {
 
   }
 
-  posterMessage() {
+  public estMotTrouve(): Boolean {
+    if (this.message){
+      return this.motATrouver.toLowerCase() == this.message.toLowerCase();
+    }
+   
+    return false;
+  }
+  
 
+  posterMessage() {
+    console.log(this.estMotTrouve());
     if(this.message){
+      if(this.estMotTrouve()){
+        this.messages.push("********");
+      }else{
       this.messages.push(this.message);
+      }
       this.message="";
     }
   }
