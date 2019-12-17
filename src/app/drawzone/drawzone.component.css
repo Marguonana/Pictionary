@@ -1,5 +1,6 @@
 #playZone{
     display:flex;
+    flex-direction: column;
 }
 
 #canvasZone{

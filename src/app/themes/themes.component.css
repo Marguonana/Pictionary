@@ -1,16 +1,19 @@
- /* .tile5 {
-    background: lightblue; 
-    background-image: url('../../ressources/images/2.jpg');
-  }  */
+.themePage {
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
 
-  .mat-grid-tile-footer{
-    font-size: 18px;
-  }
-/* .mat-grid-list{
-  margin-top: 30px;
-  margin-left: 10px;
-} */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+.mat-grid-tile-footer{
+  font-size: 18px;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.themeList:hover {
+  box-shadow: 0 0 20px rgba(33,33,33,.2); 
+}

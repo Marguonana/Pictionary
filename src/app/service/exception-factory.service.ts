@@ -5,9 +5,11 @@ import { Injectable, ErrorHandler } from '@angular/core';
 })
 export class ExceptionFactoryService extends ErrorHandler{
 
-  constructor(){
+  constructor(msg : string){
     super();
+    console.error(msg);
   }
+
   // minException() : String {}
   // maxException() : String {}
   // notSamePasswordException() : String {}

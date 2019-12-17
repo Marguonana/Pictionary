@@ -1,0 +1,7 @@
+#partie{
+    margin: 5px;
+    max-height: 90vh;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
