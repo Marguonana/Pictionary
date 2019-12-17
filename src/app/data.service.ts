@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -131,6 +132,7 @@ export class DataService implements OnDestroy {
 export class RouteList {
   private REST_API_WORDS = "/theme/words";
   private REST_API_CANVAS = "/partie/canvas"
+  private REST_API_CREATEACCOUNT = "/joueur"
 
   dispatcher(keyWord){
     let route = undefined;
@@ -140,6 +142,10 @@ export class RouteList {
         break;
       case "sendCanvas":
         route = this.REST_API_CANVAS;
+        break;
+      case "createAccount":
+        route = this.REST_API_CREATEACCOUNT;
+        break;
     }
     return route;
   }

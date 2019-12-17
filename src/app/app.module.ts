@@ -16,6 +16,8 @@ import { ThemesComponent } from './themes/themes.component';
 import { DrawzoneComponent } from './drawzone/drawzone.component';
 import { ChatComponent } from './chat/chat.component';
 import { PointComponent } from './point/point.component';
+import { PartieComponent } from './partie/partie.component';
+import { ToastrComponent } from './toastr/toastr.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PointComponent } from './point/point.component';
     ChatComponent,
     ThemesComponent,
     DrawzoneComponent,
-    PointComponent
+    PointComponent,
+    PartieComponent,
+    ToastrComponent
   ],
   imports: [
     BrowserModule,
@@ -52,12 +56,16 @@ import { PointComponent } from './point/point.component';
         component:SoumissionReponseComponent
       },
       {
-        path: 'play',
+        path: 'drawzone',
         component: DrawzoneComponent
       },
       {
+        path: 'play',
+        component: PartieComponent
+      },
+      {
         path: 'play/:theme',
-        component: DrawzoneComponent
+        component: PartieComponent
       },
       {
         path: 'chat',
