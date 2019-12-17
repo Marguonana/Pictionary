@@ -17,9 +17,9 @@ export class DrawzoneComponent implements OnInit {
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
   pen;
   private pointer : string;
+  private words : any;
 
   constructor(public dialog: MatDialog, private dataService: DataService) {}
-
 
   ngOnInit(): void {
     this.pen = {};
@@ -32,6 +32,7 @@ export class DrawzoneComponent implements OnInit {
                         'white': [] }];
     this.pen.cursor = 'url(../../assets/images/cursor/Pencil_black.png) 0 15,auto';
     this.openModal();
+    
   }
   
   animate(): void {}
@@ -51,7 +52,7 @@ export class DrawzoneComponent implements OnInit {
       this.ctx.beginPath();
       this.ctx.lineCap = 'round';
       this.ctx.lineJoin = 'round';
-    //  this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
+    //this.ctx.moveTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.lineTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.stroke();
       console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
@@ -79,20 +80,28 @@ export class DrawzoneComponent implements OnInit {
 
 
   openModal() {
-    const dialogConfig = new MatDialogConfig();
+    this.dataService.sendGetRequest(new RouteList().dispatcher("choixTheme")).subscribe((data: ArrayBuffer)=>{
+      const dialogConfig = new MatDialogConfig();
+      const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-        id: 1,
-        title: 'Words'
-    };
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      this.words=data
+      console.log(this.words['data']);
+      dialogConfig.data = {
+          id: 1,
+          title: 'WordBox',
+          word1:'', //this.words['data'][0],
+          word2: '', //this.words['data'][1],
+          word3: '', // this.words['data'][2],
+      };
+      dialogRef.afterClosed().subscribe(result => {
+        alert("response: " + result)
+      });
 
-    const dialogRef = this.dialog.open(MyDialogComponent, dialogConfig);
+    })
 
-    dialogRef.afterClosed().subscribe(result => {
-      alert("response: " + result)
-    });
+    
   }
 
   extractCanvas() : void {
