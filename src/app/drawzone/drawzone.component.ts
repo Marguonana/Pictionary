@@ -3,6 +3,8 @@ import { DataService, RouteList } from '../data.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawzone',
@@ -18,7 +20,8 @@ export class DrawzoneComponent implements OnInit {
   pen;
   private pointer : string;
 
-  constructor(public dialog: MatDialog, private dataService: DataService) {}
+  constructor(public dialog: MatDialog,
+    private api : ApiService, private route : Router) {}
 
 
   ngOnInit(): void {
@@ -95,9 +98,11 @@ export class DrawzoneComponent implements OnInit {
 
   extractCanvas() : void {
     let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
-    this.dataService.setterParamsKey('theme','canvas');
-    this.dataService.setterParamsValues("Transports",canvasPng);
-    this.dataService.sendPostRequest(new RouteList().dispatcher("sendCanvas")).subscribe((data: ArrayBuffer)=>{console.log(data)})
+    this.api.put('/partie/canvas',{theme: this.route.url, canvas: canvasPng}).toPromise()
+    .then(retour => {
+      console.log(retour);
+    })
+    .catch(err => { console.log(err); })
   }
 
 

@@ -72,7 +72,7 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
         component: PartieComponent
       },
       {
-        path: 'play/:theme',
+        path: 'play/:id',
         component: PartieComponent
       },
       {

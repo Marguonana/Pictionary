@@ -1,11 +1,13 @@
+import { ApiService } from './../api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule, MatExpansionPanelDescription, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ExceptionFactoryService } from '../service/exception-factory.service';
-import { DataService, RouteList } from '../data.service';
+import { RouteList } from '../data.service';
 
 import { ToastrComponent } from '../toastr/toastr.component';
+import { HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit,OnDestroy{
   private toastr : ToastrComponent;
   
 
-  constructor(private router: Router, private dataService : DataService) {
+  constructor(private router: Router,
+    private api : ApiService) {
     this.createAccount = false;
    }
 
@@ -34,10 +37,16 @@ export class LoginComponent implements OnInit,OnDestroy{
   }
 
   login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["/themes"]);
+
+    if(this.username && this.password){
+      this.api.get('/joueur/',new HttpParams().set('pseudo',this.username).set('mdp',this.password)).toPromise()
+      .then(retour => {
+        console.log(retour);
+        this.router.navigate(["/themes"]);
+      })
+      .catch(err => { console.log(err); })
     }else {
-      this.toastr.openSnackBar("Mot de passe incorrect");
+      console.log("Mot de passe incorrect");
     }
   }
 
@@ -62,13 +71,12 @@ export class LoginComponent implements OnInit,OnDestroy{
     }
     if (this.email && this.username && this.password){
       console.log(this.email +" "+  this.username + " "+ this.password)
-      this.dataService.setterParamsKey('email','username','password');
-      this.dataService.setterParamsValues(this.email,this.username, this.password);
-      this.dataService.sendPostRequest(new RouteList().dispatcher("createAccount")).subscribe((data)=>{
-        this.toastr.openSnackBar(data.toString())},(failure)=> {
-          this.toastr.openSnackBar(failure.error);
-          
-        })
+      this.api.post('/joueur/',{email: this.email, username: this.username, password: this.password}).toPromise()
+      .then(retour => {
+        console.log(retour);
+        this.router.navigate(["/themes"]);
+      })
+      .catch(err => { console.log(err); })
     }
     return true;
   }
