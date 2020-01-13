@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
   name = 'Angular 6';
-  timeLeft: number = 10;
+  timeLeft: number = 90;
   interval;
 
   constructor() { }
@@ -19,7 +19,7 @@ export class TimerComponent implements OnInit {
       }else if(this.timeLeft==0){
         clearInterval(this.interval);
         }else {
-        this.timeLeft = 10;
+        this.timeLeft = 90;
       }
     },1000)
   }
