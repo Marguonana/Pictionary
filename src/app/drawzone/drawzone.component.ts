@@ -4,7 +4,7 @@ import { DataService, RouteList } from '../data.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 import { ApiService } from '../api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-drawzone',
@@ -19,9 +19,10 @@ export class DrawzoneComponent implements OnInit {
   callibrage: { 'black': { 'coordX': number; 'coordY': number; }[]; 'white': any[]; }[];
   pen;
   private pointer : string;
+  idPartie: any;
 
   constructor(public dialog: MatDialog,
-    private api : ApiService, private route : Router) {}
+    private api : ApiService, private activatedRoute: ActivatedRoute) {}
 
 
   ngOnInit(): void {
@@ -34,6 +35,11 @@ export class DrawzoneComponent implements OnInit {
     this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
                         'white': [] }];
     this.pen.cursor = 'url(../../assets/images/cursor/Pencil_black.png) 0 15,auto';
+
+    this.activatedRoute.params.subscribe(params => {
+      this.idPartie = params['id'];
+      console.log('id de la partie ', this.idPartie);
+    });
   }
   
   animate(): void {}
@@ -98,7 +104,7 @@ export class DrawzoneComponent implements OnInit {
 
   extractCanvas() : void {
     let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
-    this.api.put('/partie/canvas',{theme: this.route.url, canvas: canvasPng}).toPromise()
+    this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
     .then(retour => {
       console.log(retour);
     })
