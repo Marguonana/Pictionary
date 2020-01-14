@@ -10,9 +10,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  idUtilisateur : string;
   constructor() { }
 
   ngOnInit() {
+    if (sessionStorage.getItem('compte')){
+      this.idUtilisateur = sessionStorage.getItem('compte');
+    }
+  }
+
+  getMenu(){
+    if (!this.idUtilisateur){
+      if (sessionStorage.getItem('compte')){
+        this.idUtilisateur = sessionStorage.getItem('compte');
+      }
+    }
   }
 
 }

@@ -106,9 +106,9 @@ export class DrawzoneComponent implements OnInit {
     let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
     this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
     .then(retour => {
-      console.log(retour);
+
     })
-    .catch(err => { console.log(err); })
+    // .catch(err => { console.log(err); })
   }
 
 

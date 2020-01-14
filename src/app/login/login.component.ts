@@ -39,10 +39,13 @@ export class LoginComponent implements OnInit,OnDestroy{
   login() : void {
 
     if(this.username && this.password){
-      this.api.get('/joueur/',new HttpParams().set('pseudo',this.username).set('mdp',this.password)).toPromise()
-      .then(retour => {
-        console.log(retour);
-        this.router.navigate(["/themes"]);
+      this.api.post<Joueur>('/joueur/user/',{'pseudo':this.username, 'mdp':this.password}).toPromise()
+      .then(res => {
+        console.log(res);
+        if (res && !res.err){
+          sessionStorage.setItem('compte',res._id);
+          this.router.navigate(["/themes"]);
+        }
       })
       .catch(err => { console.log(err); })
     }else {
@@ -87,5 +90,9 @@ export class LoginComponent implements OnInit,OnDestroy{
 }
 
 class Joueur {
-  
+  _id : string;
+  username: string;
+  email: string;
+  score: number;
+  err: string;
 }
