@@ -22,6 +22,7 @@ import { PointComponent } from './point/point.component';
 import { PartieComponent } from './partie/partie.component';
 import { ToastrComponent } from './toastr/toastr.component';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
     PointComponent,
     PartieComponent,
     ToastrComponent,
-    MyDialogComponent
+    MyDialogComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
