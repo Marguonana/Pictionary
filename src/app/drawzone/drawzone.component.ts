@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, DoCheck, OnDestroy } from '@angular/core';
 import { DataService, RouteList } from '../data.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-drawzone',
   templateUrl: './drawzone.component.html',
   styleUrls: ['./drawzone.component.css']
 })
-export class DrawzoneComponent implements OnInit {
+export class DrawzoneComponent implements OnInit, OnDestroy {
+
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   private isDrawing : boolean = false;  
@@ -20,6 +22,8 @@ export class DrawzoneComponent implements OnInit {
   pen;
   private pointer : string;
   idPartie: any;
+  observableCanvas: any;
+  dessinateur : false;
 
   constructor(public dialog: MatDialog,
     private api : ApiService, private activatedRoute: ActivatedRoute) {}
@@ -40,6 +44,30 @@ export class DrawzoneComponent implements OnInit {
       this.idPartie = params['id'];
       console.log('id de la partie ', this.idPartie);
     });
+
+    this.observableCanvas = Observable.create((observer : any) => {
+      try {
+        setInterval(() => {
+          observer.next(this.checkCanvas())
+        },2000)
+      } catch (err){
+        observer.error(err);
+      }
+    }) 
+    this.observableCanvas.subscribe();
+  }
+
+  checkCanvas() {
+    if (this.dessinateur){
+      this.api.get<any>('/partie/'+sessionStorage.getItem('idPartie')+'/canvas').toPromise()
+      .then(received => {
+        if(received && received.length > 0){
+          console.log(received);
+          this.ctx.drawImage(received,0,0);       
+        }
+      })
+      .catch( err => console.log(err))   
+    }
   }
   
   animate(): void {}
@@ -109,6 +137,14 @@ export class DrawzoneComponent implements OnInit {
 
     })
     // .catch(err => { console.log(err); })
+  }
+
+  ngOnDestroy(): void {
+    this.api.post('/partie/deconnexion', {idPartie: sessionStorage.getItem('idPartie'), idJoueur: sessionStorage.getItem('compte')})
+    .toPromise()
+    .then (res => {
+      console.log(res);
+    })
   }
 
 

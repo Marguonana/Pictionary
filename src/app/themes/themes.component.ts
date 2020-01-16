@@ -38,7 +38,7 @@ export class ThemesComponent implements OnInit {
     .then(
       parties => { 
         parties.map(partie => {
-          this.tiles.push({id: partie.id, text: partie.theme, cols: 1, rows: 1 ,imageUrl:'assets/images/5.jpg', borderRadius:'20px'})
+          this.tiles.push({id: partie.id, text: partie.theme, cols: 1, rows: 1, imageUrl:partie.image? partie.image : 'assets/images/5.jpg', borderRadius:'20px'})
         }) 
       })
      
@@ -48,7 +48,9 @@ export class ThemesComponent implements OnInit {
   }
 
   onClick(tile) : void {
-    this.api.get<resultatTheme>('/partie/words',new HttpParams().set('theme',tile.text.toUpperCase())).toPromise()
+    this.api.get<resultatTheme>('/partie/words',new HttpParams().set('theme',tile.text).set('pseudo',sessionStorage.getItem('pseudoCompte'))
+    .set('id', sessionStorage.getItem('compte'))
+    ).toPromise()
     .then(res => {
       console.log(res);
       sessionStorage.setItem('idPartie',res.id);
@@ -78,4 +80,5 @@ class Partie {
   motATrouver: string;
   message: [];
   reponses: [];
+  image: string;
 }

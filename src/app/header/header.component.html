@@ -10,10 +10,10 @@
                 <mat-icon>more_vert</mat-icon>
                 </button>
             </div>
-        <mat-menu #menu="matMenu" *ngIf="">
+        <mat-menu #menu="matMenu">
             <button mat-menu-item>
             <mat-icon>delete_forever</mat-icon>
-            <span>Supprimer compte</span>
+            <span (click)="getMenu()">Supprimer</span>
             </button>
         </mat-menu>
     </mat-toolbar-row>

@@ -1,4 +1,9 @@
 <div id="partie">
         <app-drawzone></app-drawzone>
         <app-chat></app-chat>
+        <div>Joueurs en ligne:
+                <ul *ngFor="let player of joueurs">
+                        <li style="list-style: none;"><mat-icon>account_circle</mat-icon> {{player.username}}</li>
+                </ul>
+        </div>
 </div>

@@ -43,11 +43,14 @@ export class LoginComponent implements OnInit,OnDestroy{
       .then(res => {
         console.log(res);
         if (res && !res.err){
+          sessionStorage.setItem('pseudoCompte',res.username);
           sessionStorage.setItem('compte',res._id);
           this.router.navigate(["/themes"]);
         }
       })
-      .catch(err => { console.log(err); })
+      .catch(err => { if (err.error && err.error.err){
+        alert(err.error.err);
+      } })
     }else {
       console.log("Mot de passe incorrect");
     }
@@ -74,9 +77,10 @@ export class LoginComponent implements OnInit,OnDestroy{
     }
     if (this.email && this.username && this.password){
       console.log(this.email +" "+  this.username + " "+ this.password)
-      this.api.post('/joueur/',{email: this.email, username: this.username, password: this.password}).toPromise()
+      this.api.post<Joueur>('/joueur/',{email: this.email, username: this.username, password: this.password}).toPromise()
       .then(retour => {
         console.log(retour);
+        sessionStorage.setItem('compte',retour._id);
         this.router.navigate(["/themes"]);
       })
       .catch(err => { console.log(err); })
