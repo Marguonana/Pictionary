@@ -1,7 +1,7 @@
 <form class="example-form">
     <div id="chatZone">
       <div style="text-align: center;">ChatZone</div>
-      <div *ngFor="let m of messages"><strong>{{pseudo}}</strong> : {{m}}</div>
+      <div *ngFor="let m of messages"><strong>{{m.emetteur}}</strong> : {{m.message}}</div>
     </div>
   <!-- <textarea
     id="chat"
