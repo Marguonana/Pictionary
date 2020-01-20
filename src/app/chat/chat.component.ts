@@ -13,6 +13,7 @@ export class ChatComponent implements OnInit {
   messages: Array<object>;
 
   observableMessage: any;
+  lock: boolean = false;
 
   constructor(private api: ApiService) {
     this.pseudo = sessionStorage.getItem('pseudoCompte') ? sessionStorage.getItem('pseudoCompte') : 'randomUser';
@@ -44,15 +45,20 @@ export class ChatComponent implements OnInit {
   posterMessage() {
     if(this.message){
       const msg = {emetteur : sessionStorage.getItem('pseudoCompte'), message : this.message};
-      this.api.post('/partie/'+sessionStorage.getItem('idPartie')+'/messages', {message : msg}).toPromise()
-      .then(res => {
-        this.message="";
-        console.log(res)
-      })
-      .catch(err => {
-        this.message="";
-        console.log(err);
-      })
+      if(this.message.toUpperCase() === localStorage.getItem('key').toUpperCase()){
+        this.lock = true;
+      }else{
+        this.lock = false;
+        this.api.post('/partie/'+sessionStorage.getItem('idPartie')+'/messages', {message : msg}).toPromise()
+        .then(res => {
+          this.message="";
+          console.log(res)
+        })
+        .catch(err => {
+          this.message="";
+          console.log(err);
+        })
+      }
       
     }
   }

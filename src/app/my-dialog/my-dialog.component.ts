@@ -11,12 +11,15 @@ export class MyDialogComponent  {
 
  
   modalWord:Array<string>;
-
+  mot: any;
  
   constructor(
     public modalRef: MatDialogRef<MyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) { 
+    console.log('Affiche DATA ' ,data )
+    this.mot = data;
+  }
 
   
   

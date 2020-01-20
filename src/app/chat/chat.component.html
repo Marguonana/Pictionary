@@ -16,6 +16,7 @@
       placeholder="Message"
       [(ngModel)]="message"
       [ngModelOptions]="{ standalone: true }"
+      [disabled]="lock"
     />
   </mat-form-field>
 

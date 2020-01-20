@@ -42,13 +42,14 @@ export class PartieComponent implements OnInit {
         let nomJoueurs = new Array();
         this.joueurs.forEach(res =>  nomJoueurs.push(res.id) )
         console.log('nomJoeurs     ' ,nomJoueurs)
-        if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord){
-          this.showChooseWord = true;
           this.api.get<any>('/partie/'+ sessionStorage.getItem('idPartie')+ '/motATrouver')
           .subscribe( res => {
-            this.openConfirmDelete(res.motATrouver)
-          })
-        }
+            localStorage.setItem('key',res.motATrouver);
+              if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord){
+                this.showChooseWord = true;
+                this.openConfirmDelete(res.motATrouver)
+              }
+          }) 
       }
     })
     .catch( err => console.log(err))   
