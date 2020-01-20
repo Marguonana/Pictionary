@@ -50,6 +50,8 @@ export class PartieComponent implements OnInit {
                 this.dessinateur = true;
                 this.showChooseWord = true;
                 this.openConfirmDelete(res.motATrouver)
+              }else if (nomJoueurs[1] !== sessionStorage.getItem('compte')) {
+                this.dessinateur = false;
               }
           }) 
       }
