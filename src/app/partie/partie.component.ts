@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 import { HttpParams } from '@angular/common/http';
+import { MyDialogComponent } from '../my-dialog/my-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-partie',
@@ -12,7 +14,9 @@ export class PartieComponent implements OnInit {
 
   observableJoueur : any;
   joueurs : Array<Joueur>;
-  constructor(private api: ApiService) { }
+  word: any;
+  showChooseWord : boolean = false;
+  constructor(private api: ApiService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.observableJoueur = Observable.create((observer : any) => {
@@ -24,7 +28,7 @@ export class PartieComponent implements OnInit {
         observer.error(err);
       }
     }) 
-    this.observableJoueur.subscribe();
+    this.observableJoueur.subscribe();   
   }
 
   checkJoueur() {
@@ -33,9 +37,35 @@ export class PartieComponent implements OnInit {
       if(received && received.length > 0){
         console.log(received);
         this.joueurs = received;
+
+        // Gestion des dessinateurs
+        let nomJoueurs = new Array();
+        this.joueurs.forEach(res =>  nomJoueurs.push(res.id) )
+        console.log('nomJoeurs     ' ,nomJoueurs)
+        if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord){
+          this.showChooseWord = true;
+          this.api.get<any>('/partie/'+ sessionStorage.getItem('idPartie')+ '/motATrouver')
+          .subscribe( res => {
+            this.openConfirmDelete(res.motATrouver)
+          })
+        }
       }
     })
     .catch( err => console.log(err))   
+  }
+
+  
+  openConfirmDelete(word): void {
+    const confirmRef = this.dialog.open(MyDialogComponent, {
+      width: '650px',
+      data: word
+    });
+    confirmRef.afterClosed().subscribe( selection => {
+      if (selection) {
+        console.log(selection)
+      }
+      console.log('La fenêtre a été fermé.');
+    });
   }
 
 }
@@ -46,4 +76,5 @@ class Joueur {
   email: string;
   score: number;
   err: string;
+  id: any;
 }

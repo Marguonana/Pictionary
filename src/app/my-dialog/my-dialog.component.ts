@@ -1,5 +1,5 @@
 import { Component, OnInit , Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({
@@ -9,16 +9,14 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class MyDialogComponent  {
 
-  modalTitle: string;
+ 
   modalWord:Array<string>;
 
  
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
-  
-  this.modalTitle = data.title;
-  console.log(data)
-  }
+  constructor(
+    public modalRef: MatDialogRef<MyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   
   
