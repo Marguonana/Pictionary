@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, DoCheck, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, DoCheck, OnDestroy, Input } from '@angular/core';
 import { DataService, RouteList } from '../data.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -23,23 +23,17 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
   private pointer : string;
   idPartie: any;
   observableCanvas: any;
-  dessinateur : false;
+  link: any;
+  img: any;
+  @Input() dessinateur : boolean;
 
   constructor(public dialog: MatDialog,
     private api : ApiService, private activatedRoute: ActivatedRoute) {}
 
 
   ngOnInit(): void {
-    this.pen = {};
-    this.ctx = this.canvas.nativeElement.getContext('2d');
-    this.ctx.imageSmoothingQuality = 'high';
-    this.ctx.lineJoin = 'round';
-    this.ctx.lineWidth = 3;
-    this.ctx.fillStyle = 'black';
-    this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
-                        'white': [] }];
-    this.pen.cursor = 'url(../../assets/images/cursor/Pencil_black.png) 0 15,auto';
-
+    this.initCanvas();
+   
     this.activatedRoute.params.subscribe(params => {
       this.idPartie = params['id'];
       console.log('id de la partie ', this.idPartie);
@@ -58,15 +52,16 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
   }
 
   checkCanvas() {
-    if (this.dessinateur){
+    if (!this.dessinateur){
       this.api.get<any>('/partie/'+sessionStorage.getItem('idPartie')+'/canvas').toPromise()
       .then(received => {
-        if(received && received.length > 0){
-          console.log(received);
-          this.ctx.drawImage(received,0,0);       
+        if(received){
+          this.img = received;
         }
       })
       .catch( err => console.log(err))   
+    }else {
+      this.extractCanvas();
     }
   }
   
@@ -82,8 +77,23 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
     console.log('mouseup');
   }
 
+  initCanvas(){
+    this.pen = {};
+    this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.ctx.imageSmoothingQuality = 'high';
+    this.ctx.lineJoin = 'round';
+    this.ctx.lineWidth = 3;
+    this.ctx.fillStyle = 'black';
+    this.callibrage = [{'black': [{'coordX': -10, 'coordY':5}],
+                        'white': [] }];
+    this.pen.cursor = 'url(../../assets/images/cursor/Pencil_black.png) 0 15,auto';
+  }
+
   drawing(event) : void{
-    if(this.isDrawing){
+    if(this.isDrawing && this.dessinateur){
+      if(!this.ctx){
+        this.initCanvas();
+      }
       this.ctx.beginPath();
       this.ctx.lineCap = 'round';
       this.ctx.lineJoin = 'round';
@@ -91,7 +101,6 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
       this.ctx.lineTo(event.clientX-event.currentTarget.offsetLeft,event.clientY-event.currentTarget.offsetTop);
       this.ctx.stroke();
       console.log("penX : "+event.clientX + ". penY : " + (event.clientY));
-      this.extractCanvas();
     }
   }
 
@@ -131,12 +140,14 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
   }
 
   extractCanvas() : void {
-    let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
-    this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
-    .then(retour => {
-
-    })
-    // .catch(err => { console.log(err); })
+    if (this.dessinateur){
+      let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
+      this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
+      .then(retour => {
+        console.log('canvas envoyé')
+      })
+      .catch(err => { console.log(err); })
+    }
   }
 
   ngOnDestroy(): void {

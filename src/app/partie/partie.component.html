@@ -1,5 +1,5 @@
 <div id="partie">
-        <app-drawzone></app-drawzone>
+        <app-drawzone [dessinateur]="dessinateur"></app-drawzone>
         <app-chat></app-chat>
         <div>Joueurs en ligne:
                 <ul *ngFor="let player of joueurs">

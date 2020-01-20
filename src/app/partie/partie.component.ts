@@ -15,6 +15,7 @@ export class PartieComponent implements OnInit {
   observableJoueur : any;
   joueurs : Array<Joueur>;
   word: any;
+  dessinateur : boolean = false;
   showChooseWord : boolean = false;
   constructor(private api: ApiService, public dialog: MatDialog) { }
 
@@ -46,9 +47,11 @@ export class PartieComponent implements OnInit {
           .subscribe( res => {
             localStorage.setItem('key',res.motATrouver);
               if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord){
+                this.dessinateur = true;
                 this.showChooseWord = true;
                 this.openConfirmDelete(res.motATrouver)
               }
+              else {this.dessinateur = false;}
           }) 
       }
     })

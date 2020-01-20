@@ -1,8 +1,10 @@
 <div id="playZone">
-    <div id="fakeBorder">
+    <div id="fakeBorder" >
             <canvas id="canvasZone" #canvas width="600" height="300" 
             (mousedown)="setIsDrawing($event)" (mouseup)="setIsNotDrawing($event)" 
             (mousemove)="drawing($event)" [ngStyle]="{'cursor': pen.cursor}" ></canvas>
+
+            <img id="img" [src]="img.canvas" width="600" height="300" style="margin-top:-300px"/>
     </div>
     <mat-card id="tools">
             <img id="eraser" alt="eraser" src="../../assets/images/cursor/Eraser.png" (click)="selectItem('eraser')" />
