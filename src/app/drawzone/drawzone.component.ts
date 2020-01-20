@@ -33,7 +33,6 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initCanvas();
-   
     this.activatedRoute.params.subscribe(params => {
       this.idPartie = params['id'];
       console.log('id de la partie ', this.idPartie);
@@ -59,8 +58,8 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
           this.img = received;
         }
       })
-      .catch( err => console.log(err))   
-    }else {
+     .catch( err => console.log(err))   
+    } else {
       this.extractCanvas();
     }
   }
@@ -139,15 +138,16 @@ export class DrawzoneComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Sauvagarde le canvas
+   */
   extractCanvas() : void {
-    if (this.dessinateur){
-      let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
-      this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
-      .then(retour => {
-        console.log('canvas envoyé')
-      })
-      .catch(err => { console.log(err); })
-    }
+    let canvasPng = this.canvas.nativeElement.toDataURL('image/png', 1.0);
+    this.api.put('/partie/'+ this.idPartie + '/canvas',{canvas: canvasPng}).toPromise()
+    .then(retour => {
+      console.log('canvas envoyé')
+    })
+    .catch(err => { console.log(err); })
   }
 
   ngOnDestroy(): void {

@@ -46,12 +46,11 @@ export class PartieComponent implements OnInit {
           this.api.get<any>('/partie/'+ sessionStorage.getItem('idPartie')+ '/motATrouver')
           .subscribe( res => {
             localStorage.setItem('key',res.motATrouver);
-              if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord){
+              if( nomJoueurs[1] == sessionStorage.getItem('compte') && !this.showChooseWord) {
                 this.dessinateur = true;
                 this.showChooseWord = true;
                 this.openConfirmDelete(res.motATrouver)
               }
-              else {this.dessinateur = false;}
           }) 
       }
     })
